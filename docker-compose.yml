@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  appmongo.service:
+    image: ${DOCKER_REGISTRY-}appmongoservice
+    build:
+      context: .
+      dockerfile: src/AppMongo.Service/Dockerfile
