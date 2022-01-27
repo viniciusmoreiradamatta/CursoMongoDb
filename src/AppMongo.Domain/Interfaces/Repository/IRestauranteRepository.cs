@@ -7,5 +7,7 @@ namespace AppMongo.Repository
         void Inserir(Restaurante resturante);
 
         Task<IEnumerable<Restaurante>> ObterTodosRestaurantes();
+
+        Restaurante ObterRestaurantePorId(string id);
     }
 }

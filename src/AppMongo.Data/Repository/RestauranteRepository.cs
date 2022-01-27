@@ -41,5 +41,8 @@ namespace AppMongo.Repository
 
             return listaRestaurante;
         }
+
+        public Restaurante ObterRestaurantePorId(string id) =>
+            this.restauranteSchema.AsQueryable().FirstOrDefault(c => c.Id.Equals(id)).ConverterParaRestaurante();
     }
 }

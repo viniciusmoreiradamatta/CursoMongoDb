@@ -6,22 +6,15 @@ using AppMongo.ViewModels;
 
 namespace AppMongo.ApplocationServices
 {
-    public interface IRestauranteAppService
-    {
-        void Inserir(RestauranteViewModel restaurante);
-
-        Task<IEnumerable<Restaurante>> ObterTodosRestaurantes();
-    }
-
     public class RestauranteAppService : IRestauranteAppService
     {
-        private readonly IRestauranteRepository _restauranteRepository;
+        private readonly IRestauranteRepository restauranteRepository;
 
         public RestauranteAppService(IRestauranteRepository restauranteRepository)
         {
-            _restauranteRepository = restauranteRepository;
+            this.restauranteRepository = restauranteRepository;
         }
-            
+
         public void Inserir(RestauranteViewModel restaurante)
         {
             _ = Enum.TryParse(restaurante.TipoCozinha.ToString(), out TipoCozinha tipo);
@@ -30,9 +23,11 @@ namespace AppMongo.ApplocationServices
                                                  new Endereco(restaurante.Logradouro, restaurante.Numero,
                                                               restaurante.Cidade, restaurante.Uf, restaurante.Cep));
 
-            _restauranteRepository.Inserir(novoRestaurante);
+            this.restauranteRepository.Inserir(novoRestaurante);
         }
 
-        public async Task<IEnumerable<Restaurante>> ObterTodosRestaurantes() => await _restauranteRepository.ObterTodosRestaurantes();
+        public async Task<IEnumerable<Restaurante>> ObterTodosRestaurantes() => await this.restauranteRepository.ObterTodosRestaurantes();
+
+        public Restaurante ObterRestaurantePorId(string id) => this.restauranteRepository.ObterRestaurantePorId(id);
     }
 }

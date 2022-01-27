@@ -8,17 +8,17 @@ namespace AppMongo.Service.Controllers;
 [Route("[controller]")]
 public class RestauranteController : ControllerBase
 {
-    private readonly IRestauranteAppService _restauranteAppService;
+    private readonly IRestauranteAppService restauranteAppService;
 
     public RestauranteController(IRestauranteAppService restauranteAppService)
     {
-        _restauranteAppService = restauranteAppService;
+        this.restauranteAppService = restauranteAppService;
     }
 
     [HttpPost]
     public IActionResult Inserir(RestauranteViewModel vm)
     {
-        _restauranteAppService.Inserir(vm);
+        this.restauranteAppService.Inserir(vm);
 
         return Ok();
     }
@@ -26,8 +26,17 @@ public class RestauranteController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> ObterTodos()
     {
-        var todosRestaurantes = await _restauranteAppService.ObterTodosRestaurantes();
+        var todosRestaurantes = await this.restauranteAppService.ObterTodosRestaurantes();
 
         return Ok(todosRestaurantes);
+    }
+
+    [HttpGet]
+    [Route("{id}")]
+    public IActionResult ObterRestaurantePorId(string id)
+    {
+        var restaurante = this.restauranteAppService.ObterRestaurantePorId(id);
+
+        return Ok(restaurante);
     }
 }
