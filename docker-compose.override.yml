@@ -11,27 +11,8 @@ services:
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    depends_on: 
+      - mongo
+
     networks:
       - mongo
-  mongo:
-    image: mongo
-    restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: mongoUser
-      MONGO_INITDB_ROOT_PASSWORD: mongoP4ssw0rd
-    networks:
-      - mongo
-  mongo-express:
-    image: mongo-express
-    restart: always
-    ports:
-      - 8081:8081
-    environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: mongoUser
-      ME_CONFIG_MONGODB_ADMINPASSWORD: mongoP4ssw0rd
-      ME_CONFIG_MONGODB_URL: mongodb://mongoUser:mongoP4ssw0rd@mongo:27017/
-    networks:
-      - mongo
-networks:
-  mongo:
-    driver: bridge
