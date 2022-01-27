@@ -14,7 +14,7 @@ namespace AppMongo.Repository
             this.restauranteSchema = context._db.GetCollection<RestauranteSchema>("restaurantes");
         }
 
-        public void Inserir(Resturante resturante)
+        public void Inserir(Restaurante resturante)
         {
             var document = new RestauranteSchema
             {
@@ -31,6 +31,15 @@ namespace AppMongo.Repository
             };
 
             this.restauranteSchema.InsertOne(document);
+        }
+
+        public async Task<IEnumerable<Restaurante>> ObterTodosRestaurantes()
+        {
+            List<Restaurante> listaRestaurante = new();
+
+            await this.restauranteSchema.AsQueryable().ForEachAsync(item => listaRestaurante.Add(item.ConverterParaRestaurante()));
+
+            return listaRestaurante;
         }
     }
 }

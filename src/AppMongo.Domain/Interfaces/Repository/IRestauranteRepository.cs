@@ -4,6 +4,8 @@ namespace AppMongo.Repository
 {
     public interface IRestauranteRepository
     {
-        void Inserir(Resturante resturante);
+        void Inserir(Restaurante resturante);
+
+        Task<IEnumerable<Restaurante>> ObterTodosRestaurantes();
     }
 }

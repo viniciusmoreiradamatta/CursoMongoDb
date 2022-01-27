@@ -3,9 +3,9 @@ using AppMongo.Enuns;
 
 namespace AppMongo.Entities
 {
-    public class Resturante
+    public class Restaurante
     {
-        public Resturante(string id, string nome, TipoCozinha tipoCozinha, Endereco endereco)
+        public Restaurante(string id, string nome, TipoCozinha tipoCozinha, Endereco endereco)
         {
             Id = id;
             Nome = nome;

@@ -22,4 +22,12 @@ public class RestauranteController : ControllerBase
 
         return Ok();
     }
+
+    [HttpGet]
+    public async Task<IActionResult> ObterTodos()
+    {
+        var todosRestaurantes = await _restauranteAppService.ObterTodosRestaurantes();
+
+        return Ok(todosRestaurantes);
+    }
 }
